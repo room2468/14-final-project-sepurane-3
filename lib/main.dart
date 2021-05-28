@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sepurane_kasir/screens/MenuScreen.dart';
 import 'package:sepurane_kasir/screens/RiwayatTransaksi.dart';
+import 'package:sepurane_kasir/screens/AddMenu.dart';
 
 void main() {
   runApp(MyApp());
@@ -58,7 +59,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ListTile(
               leading: Icon(Icons.addchart_rounded),
               title: Text('Tambah Menu'),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (BuildContext context) => new AddMenu(),
+                ));
+              },
             ),
             Divider(),
             ListTile(
