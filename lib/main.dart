@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sepurane_kasir/screens/MenuScreen.dart';
+import 'package:sepurane_kasir/screens/RiwayatTransaksi.dart';
 
 void main() {
   runApp(MyApp());
@@ -63,7 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ListTile(
               leading: Icon(Icons.history),
               title: Text('Riwayat Transaksi'),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => RiwayatTransaksi()));
+              },
             ),
           ],
         )),
