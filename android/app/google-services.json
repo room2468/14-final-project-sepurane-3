@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1014416564198",
+    "project_id": "sepurane-kasir",
+    "storage_bucket": "sepurane-kasir.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014416564198:android:6066e9666d3d3d35b48027",
+        "android_client_info": {
+          "package_name": "com.example.sepurane_kasir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014416564198-p76nkdjv605ipdset3sieh987k7ipbm5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sepurane_kasir",
+            "certificate_hash": "04b63e02246ca92aaed4fa8a176b1f06ec8a1f17"
+          }
+        },
+        {
+          "client_id": "1014416564198-srl5krpqhn2scljrjvm1q4gpu1dsommt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChkbne6OQAEfveTtFaYTvaieKFVgHGg0M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014416564198-srl5krpqhn2scljrjvm1q4gpu1dsommt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

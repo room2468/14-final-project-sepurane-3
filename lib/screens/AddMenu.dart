@@ -10,9 +10,7 @@ class AddMenu extends StatefulWidget {
 
 class _AddMenuState extends State<AddMenu> {
   MenuModel menu;
-
   TextEditingController nameController = TextEditingController();
-
   TextEditingController priceController = TextEditingController();
 
   @override 
@@ -37,6 +35,7 @@ class _AddMenuState extends State<AddMenu> {
         top: false,
         bottom: false,
         child: Form(
+          // ignore: deprecated_member_use
           autovalidate: false,
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -63,12 +62,6 @@ class _AddMenuState extends State<AddMenu> {
                   labelText: 'Harga',
                 ),
                 keyboardType: TextInputType.number,
-                //onFieldSubmitted: (), 
-                  //(pricevalue) {
-                  //setState(() {
-                  //  menu.price = pricevalue as int;
-                  //});
-                  //},  
                 validator: (pricevalue) {
                   if (pricevalue.isEmpty) {
                     return 'silakan isi harga';
@@ -77,6 +70,7 @@ class _AddMenuState extends State<AddMenu> {
                 },
               ),
 
+              // ignore: deprecated_member_use
               RaisedButton(
                 color: Theme.of(context).primaryColorLight,
                 textColor: Theme.of(context).primaryColorDark,
@@ -91,7 +85,6 @@ class _AddMenuState extends State<AddMenu> {
                     menu.name = nameController.text;
                     menu.price = int.parse(priceController.text);
                   }
-
                   Navigator.pop(context, menu);
                 },
               ),

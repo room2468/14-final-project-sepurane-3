@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sepurane_kasir/screens/MenuScreen.dart';
 import 'package:sepurane_kasir/screens/RiwayatTransaksi.dart';
 import 'package:sepurane_kasir/screens/AddMenu.dart';
+import 'package:flutter/services.dart';
+import 'package:sepurane_kasir/services/sign_in.dart';
+
+import 'screens/LoginPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,11 +14,15 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Sepurane Resto',
+      title: 'Sepurane POS',
       theme: ThemeData(primarySwatch: Colors.yellow),
-      home: MyHomePage(),
+      home: LoginPage(),
     );
   }
 }
@@ -33,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            "Sepurane Resto",
+            "Sepurane POS",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           bottom: TabBar(
@@ -47,13 +55,18 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         drawer: Drawer(
             child: ListView(
-          children: [
-            AppBar(
-              title: Text(
-                'Sepurane Resto',
-                style: TextStyle(fontWeight: FontWeight.bold),
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text(name),
+              accountEmail: Text(email),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(
+                  imageUrl,
+                ),
+                radius: 60,
+                backgroundColor: Colors.transparent,
               ),
-              automaticallyImplyLeading: false,
             ),
             Divider(),
             ListTile(
@@ -74,6 +87,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     builder: (BuildContext context) => RiwayatTransaksi()));
               },
             ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Logout'),
+              onTap: () {
+                signOutGoogle();
+
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) {
+                  return LoginPage();
+                }), ModalRoute.withName('/'));
+              },
+            ),
+            Divider(),
           ],
         )),
         body: TabBarView(
