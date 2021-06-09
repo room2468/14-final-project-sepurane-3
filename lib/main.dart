@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:sepurane_kasir/screens/MenuScreen.dart';
 import 'package:sepurane_kasir/screens/RiwayatTransaksi.dart';
 import 'package:sepurane_kasir/screens/AddMenu.dart';
@@ -7,7 +8,9 @@ import 'package:sepurane_kasir/services/sign_in.dart';
 
 import 'screens/LoginPage.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
