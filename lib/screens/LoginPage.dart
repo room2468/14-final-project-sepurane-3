@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sepurane_kasir/main.dart';
+import 'package:sepurane_kasir/screens/HomePage.dart';
 import 'package:sepurane_kasir/services/sign_in.dart';
 
 class LoginPage extends StatefulWidget {
