@@ -19,8 +19,7 @@ class DetailTransaksi extends StatelessWidget {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => RiwayatTransaksi()));
+              Navigator.of(context).pop();
             },
           ),
         ),

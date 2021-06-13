@@ -76,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.addchart_rounded),
               title: Text('Tambah Menu'),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.of(context).push(new MaterialPageRoute(
                   builder: (BuildContext context) => new AddMenu(),
                 ));
@@ -86,6 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.history),
               title: Text('Riwayat Transaksi'),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => RiwayatTransaksi()));
               },

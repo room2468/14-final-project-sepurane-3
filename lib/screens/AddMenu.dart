@@ -116,8 +116,7 @@ class _AddMenuState extends State<AddMenu> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => MyHomePage()));
+            Navigator.of(context).pop();
           },
         ),
       ),
