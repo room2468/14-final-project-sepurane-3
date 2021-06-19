@@ -73,7 +73,6 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Text('Logout'),
               onTap: () {
                 signOutGoogle();
-
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(builder: (context) {
                   return LoginPage();

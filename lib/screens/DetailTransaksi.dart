@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sepurane_kasir/screens/RiwayatTransaksi.dart';
 
 class DetailTransaksi extends StatelessWidget {
   @override
@@ -66,7 +65,6 @@ class DetailTransaksi extends StatelessWidget {
                           child: Text(
                             "Rp 12.000",
                             textAlign: TextAlign.center,
-                            //style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),

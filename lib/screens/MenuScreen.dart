@@ -31,7 +31,7 @@ class MenuScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                       image: DecorationImage(
                           image: new NetworkImage(
-                              "https://awsimages.detik.net.id/community/media/visual/2020/08/18/nasi-goreng-pedas_43.jpeg?w=700&q=90"),
+                              documentSnapshot['img'],),
                           fit: BoxFit.fill)),
                   child: Container(
                     child: ListView(

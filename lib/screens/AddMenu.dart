@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sepurane_kasir/main.dart';
 
 class AddMenu extends StatefulWidget {
   @override
@@ -10,18 +9,17 @@ class AddMenu extends StatefulWidget {
 class _AddMenuState extends State<AddMenu> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _imgController = TextEditingController();
 
   CollectionReference _menu = FirebaseFirestore.instance.collection('menu');
 
-  // This function is triggered when the floatting button or one of the edit buttons is pressed
-  // Adding a product if no documentSnapshot is passed
-  // If documentSnapshot != null then update an existing product
   Future<void> _createOrUpdate([DocumentSnapshot documentSnapshot]) async {
     String action = 'create';
     if (documentSnapshot != null) {
       action = 'update';
       _nameController.text = documentSnapshot['name'];
       _priceController.text = documentSnapshot['price'].toString();
+      _imgController.text = documentSnapshot['img'];
     }
 
     await showModalBottomSheet(
@@ -37,13 +35,13 @@ class _AddMenuState extends State<AddMenu> {
                 TextFormField(
                   decoration: const InputDecoration(
                       icon: Icon(Icons.restaurant_menu_rounded),
-                      helperText: 'masukkan menu',
+                      helperText: 'Masukkan menu',
                       labelText: 'Menu'),
                   controller: _nameController,
                   keyboardType: TextInputType.name,
                   validator: (menuvalue) {
                     if (menuvalue.isEmpty) {
-                      return 'silakan isi menu';
+                      return 'Silakan isi menu';
                     }
                     return null;
                   },
@@ -53,12 +51,27 @@ class _AddMenuState extends State<AddMenu> {
                   controller: _priceController,
                   decoration: const InputDecoration(
                     icon: Icon(Icons.attach_money),
-                    helperText: 'masukkan harga',
+                    helperText: 'Masukkan harga',
                     labelText: 'Harga',
                   ),
                   validator: (pricevalue) {
                     if (pricevalue.isEmpty) {
-                      return 'silakan isi harga';
+                      return 'Silakan isi harga';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  controller: _imgController,
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.image),
+                    helperText: 'Masukkan link gambar',
+                    labelText: 'Gambar',
+                  ),
+                  validator: (pricevalue) {
+                    if (pricevalue.isEmpty) {
+                      return 'Silakan isi link gambar';
                     }
                     return null;
                   },
@@ -71,24 +84,22 @@ class _AddMenuState extends State<AddMenu> {
                   onPressed: () async {
                     final String name = _nameController.text;
                     final double price = double.tryParse(_priceController.text);
+                    final String img = _imgController.text;
                     if (name != null && price != null) {
                       if (action == 'create') {
-                        // Persist a new product to Firestore
-                        await _menu.add({"name": name, "price": price});
+                        await _menu
+                            .add({"name": name, "price": price, "img": img});
                       }
 
                       if (action == 'update') {
-                        // Update the product
                         await _menu
                             .doc(documentSnapshot.id)
-                            .update({"name": name, "price": price});
+                            .update({"name": name, "price": price, "img": img});
                       }
 
-                      // Clear the text fields
                       _nameController.text = '';
                       _priceController.text = '';
-
-                      // Hide the bottom sheet
+                      _imgController.text = '';
                       Navigator.of(context).pop();
                     }
                   },
@@ -99,11 +110,9 @@ class _AddMenuState extends State<AddMenu> {
         });
   }
 
-  // Deleteing a product by id
   Future<void> _deleteProduct(String productId) async {
     await _menu.doc(productId).delete();
 
-    // Show a snackbar
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Menu berhasil dihapus')));
   }
@@ -120,7 +129,6 @@ class _AddMenuState extends State<AddMenu> {
           },
         ),
       ),
-      // Using StreamBuilder to display all products from Firestore in real-time
       body: StreamBuilder(
         stream: _menu.snapshots(),
         builder: (context, streamSnapshot) {
@@ -133,18 +141,19 @@ class _AddMenuState extends State<AddMenu> {
                 return Card(
                   margin: EdgeInsets.all(10),
                   child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(documentSnapshot['img']),
+                    ),
                     title: Text(documentSnapshot['name']),
                     subtitle: Text(documentSnapshot['price'].toString()),
                     trailing: SizedBox(
                       width: 100,
                       child: Row(
                         children: [
-                          // Press this button to edit a single product
                           IconButton(
                               icon: Icon(Icons.edit),
                               onPressed: () =>
                                   _createOrUpdate(documentSnapshot)),
-                          // This icon button is used to delete a single product
                           IconButton(
                               icon: Icon(Icons.delete),
                               onPressed: () =>
@@ -163,7 +172,6 @@ class _AddMenuState extends State<AddMenu> {
           );
         },
       ),
-      // Add new product
       floatingActionButton: FloatingActionButton(
         onPressed: () => _createOrUpdate(),
         child: Icon(Icons.add),
