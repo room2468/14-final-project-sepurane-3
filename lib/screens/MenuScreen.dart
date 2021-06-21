@@ -31,7 +31,7 @@ class MenuScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                       image: DecorationImage(
                           image: new NetworkImage(
-                              documentSnapshot['name'],),
+                              documentSnapshot['img'],),
                           fit: BoxFit.fill)),
                   child: Container(
                     child: ListView(

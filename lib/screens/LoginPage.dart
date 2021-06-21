@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sepurane_kasir/screens/HomePage.dart';
 import 'package:sepurane_kasir/services/sign_in.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -47,13 +48,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () {
         signInWithGoogle().then((result) {
           if (result != null) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) {
-                  return MyHomePage();
-                },
-              ),
-            );
+            Get.off(MyHomePage());
           }
         });
       },

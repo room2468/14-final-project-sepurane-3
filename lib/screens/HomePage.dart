@@ -5,6 +5,7 @@ import 'package:sepurane_kasir/screens/LoginPage.dart';
 import 'package:sepurane_kasir/screens/MenuScreen.dart';
 import 'package:sepurane_kasir/screens/RiwayatTransaksi.dart';
 import 'package:sepurane_kasir/services/sign_in.dart';
+import 'package:get/get.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -51,9 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
             leading: Icon(Icons.addchart_rounded),
             title: Text('Tambah Menu'),
             onTap: () {
-              Navigator.of(context).pushReplacement(new MaterialPageRoute(
-                builder: (BuildContext context) => new AddMenu(),
-              ));
+              Get.to(AddMenu());
             },
           ),
           Divider(),
@@ -61,8 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
             leading: Icon(Icons.history),
             title: Text('Riwayat Transaksi'),
             onTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (BuildContext context) => RiwayatTransaksi()));
+              Get.to(RiwayatTransaksi());
             },
           ),
           Divider(),
@@ -71,10 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Text('Logout'),
             onTap: () {
               signOutGoogle();
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) {
-                return LoginPage();
-              }), ModalRoute.withName('/'));
+              Get.offAll(LoginPage());
             },
           ),
           Divider(),

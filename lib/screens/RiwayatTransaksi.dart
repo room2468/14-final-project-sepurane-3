@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sepurane_kasir/screens/DetailTransaksi.dart';
 import 'package:sepurane_kasir/screens/HomePage.dart';
+import 'package:get/get.dart';
 
 class RiwayatTransaksi extends StatelessWidget {
   @override
@@ -31,8 +32,7 @@ class RiwayatTransaksi extends StatelessWidget {
               ),
               subtitle: Text("Total : Rp 12.000"),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => DetailTransaksi()));
+               Get.to(DetailTransaksi());
               },
             ),
           )

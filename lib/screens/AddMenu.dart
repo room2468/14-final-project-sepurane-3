@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
 class AddMenu extends StatefulWidget {
   @override
@@ -100,7 +101,7 @@ class _AddMenuState extends State<AddMenu> {
                       _nameController.text = '';
                       _priceController.text = '';
                       _imgController.text = '';
-                      Navigator.of(context).pop();
+                      Get.back();
                     }
                   },
                 )
@@ -125,7 +126,7 @@ class _AddMenuState extends State<AddMenu> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop();
+            Get.back();
           },
         ),
       ),

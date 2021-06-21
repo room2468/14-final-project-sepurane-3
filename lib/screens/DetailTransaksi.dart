@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DetailTransaksi extends StatelessWidget {
   @override
@@ -18,7 +19,7 @@ class DetailTransaksi extends StatelessWidget {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.of(context).pop();
+              Get.back();
             },
           ),
         ),
