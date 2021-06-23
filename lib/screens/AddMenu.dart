@@ -11,6 +11,7 @@ class _AddMenuState extends State<AddMenu> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _imgController = TextEditingController();
+  final TextEditingController _idController = TextEditingController();
 
   CollectionReference _menu = FirebaseFirestore.instance.collection('menu');
 
@@ -21,6 +22,7 @@ class _AddMenuState extends State<AddMenu> {
       _nameController.text = documentSnapshot['name'];
       _priceController.text = documentSnapshot['price'].toString();
       _imgController.text = documentSnapshot['img'];
+      _idController.text = documentSnapshot['id'];
     }
 
     await showModalBottomSheet(
@@ -33,6 +35,20 @@ class _AddMenuState extends State<AddMenu> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                TextFormField(
+                  decoration: const InputDecoration(
+                      icon: Icon(Icons.restaurant_menu_rounded),
+                      helperText: 'Masukkan Kode Menu',
+                      labelText: 'Kode Menu'),
+                  controller: _idController,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  validator: (menuvalue) {
+                    if (menuvalue.isEmpty) {
+                      return 'Silakan isi kode menu';
+                    }
+                    return null;
+                  },
+                ),
                 TextFormField(
                   decoration: const InputDecoration(
                       icon: Icon(Icons.restaurant_menu_rounded),
@@ -63,7 +79,7 @@ class _AddMenuState extends State<AddMenu> {
                   },
                 ),
                 TextFormField(
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  keyboardType: TextInputType.name,
                   controller: _imgController,
                   decoration: const InputDecoration(
                     icon: Icon(Icons.image),
@@ -84,23 +100,25 @@ class _AddMenuState extends State<AddMenu> {
                   child: Text(action == 'create' ? 'Create' : 'Update'),
                   onPressed: () async {
                     final String name = _nameController.text;
-                    final double price = double.tryParse(_priceController.text);
+                    final String price = _priceController.text;
                     final String img = _imgController.text;
-                    if (name != null && price != null) {
+                    final String id = _idController.text;
+                    if (name != null && price != null && img != null && id != null) {
                       if (action == 'create') {
                         await _menu
-                            .add({"name": name, "price": price, "img": img});
+                            .add({"name": name, "price": price, "img": img, "id": id});
                       }
 
                       if (action == 'update') {
                         await _menu
                             .doc(documentSnapshot.id)
-                            .update({"name": name, "price": price, "img": img});
+                            .update({"name": name, "price": price, "img": img, "id": id});
                       }
 
                       _nameController.text = '';
                       _priceController.text = '';
                       _imgController.text = '';
+                      _idController.text = '';
                       Get.back();
                     }
                   },
@@ -146,7 +164,7 @@ class _AddMenuState extends State<AddMenu> {
                       backgroundImage: NetworkImage(documentSnapshot['img']),
                     ),
                     title: Text(documentSnapshot['name']),
-                    subtitle: Text(documentSnapshot['price'].toString()),
+                    subtitle: Text(documentSnapshot['price'].toString()+ " K"),
                     trailing: SizedBox(
                       width: 100,
                       child: Row(

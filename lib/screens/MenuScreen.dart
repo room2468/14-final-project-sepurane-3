@@ -46,7 +46,7 @@ class MenuScreen extends StatelessWidget {
                             ),
                           ),
                           subtitle: Text(
-                            documentSnapshot['price'].toString(),
+                            documentSnapshot['price'].toString() + " K",
                             style: TextStyle(
                                 color: Colors.white,
                                 background: Paint()
