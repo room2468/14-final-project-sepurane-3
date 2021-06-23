@@ -12,8 +12,7 @@ class RiwayatTransaksi extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop(
-                MaterialPageRoute(builder: (BuildContext context) => MyHomePage()));
+             Get.back();
           },
         ),
       ),

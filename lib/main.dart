@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:sepurane_kasir/controllers/UserController.dart';
+import 'package:sepurane_kasir/screens/AuthScreen.dart';
+import 'package:sepurane_kasir/services/firebase.dart';
 import 'package:get/get.dart';
-import 'screens/LoginPage.dart';
-
-void main() async{
+import 'package:sepurane_kasir/controllers/AppController.dart';
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await initialization.then((value) {
+    Get.put(AppController());
+    Get.put(UserController());
+  });
   runApp(MyApp());
 }
 
@@ -21,9 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Sepurane POS',
       theme: ThemeData(primarySwatch: Colors.yellow),
-      home: LoginPage(),
+      home: AuthScreen(),
     );
   }
 }
-
-
