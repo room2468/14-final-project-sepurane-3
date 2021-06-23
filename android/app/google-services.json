@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "329540775679",
-    "project_id": "sepurane-kasir-c1663",
-    "storage_bucket": "sepurane-kasir-c1663.appspot.com"
+    "project_number": "1007082992485",
+    "project_id": "sepuranekasir",
+    "storage_bucket": "sepuranekasir.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:329540775679:android:7e9c546ea009dabc47a6ca",
+        "mobilesdk_app_id": "1:1007082992485:android:c52aead3e563411675e78c",
         "android_client_info": {
           "package_name": "com.example.sepurane_kasir"
         }
       },
       "oauth_client": [
         {
-          "client_id": "329540775679-ivspscpobiich49d7lgd8s79adf0i6d8.apps.googleusercontent.com",
+          "client_id": "1007082992485-1hb2g9cm4577d89svdjive4rla8ejoks.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.sepurane_kasir",
-            "certificate_hash": "f29607a19443ad262353a661cd9cf8a056aec29f"
+            "certificate_hash": "a1ad724d8fb4dd442ca3040c5335c16c3ff36788"
           }
         },
         {
-          "client_id": "329540775679-l0jvvnqi28um0dc3gbt6c5jh0k6fiaqh.apps.googleusercontent.com",
+          "client_id": "1007082992485-qhflo4thdjc8obnjvmsokct76885s0ku.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6TiAj0eyftChJgFslzvE9gpkY0NrAj68"
+          "current_key": "AIzaSyCvAvvwnu24IJ8MpxVRqp_P1FJQ5HXX0QU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "329540775679-l0jvvnqi28um0dc3gbt6c5jh0k6fiaqh.apps.googleusercontent.com",
+              "client_id": "1007082992485-qhflo4thdjc8obnjvmsokct76885s0ku.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

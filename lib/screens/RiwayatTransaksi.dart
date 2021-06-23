@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sepurane_kasir/screens/DetailTransaksi.dart';
-import 'package:sepurane_kasir/screens/HomePage.dart';
 import 'package:get/get.dart';
 
 class RiwayatTransaksi extends StatelessWidget {
