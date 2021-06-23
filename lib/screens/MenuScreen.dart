@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sepurane_kasir/controllers/CartController.dart';
 import 'package:sepurane_kasir/controllers/MenuController.dart';
 import 'package:sepurane_kasir/model/MenuModel.dart';
 
@@ -7,6 +8,7 @@ import 'package:sepurane_kasir/model/MenuModel.dart';
 class MenuScreen extends StatelessWidget {
   final MenuModel menuItem;
   MenuController menuController = MenuController.instance;
+  CartController cartController = CartController.instance;
 
   MenuScreen({Key key, this.menuItem}) : super(key: key);
   @override
@@ -55,7 +57,9 @@ class MenuScreen extends StatelessWidget {
                           Icons.add,
                           color: Colors.white,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          cartController.addMenuToCart(menuItem);
+                        },
                       ),
                     ),
                   ],
