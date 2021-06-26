@@ -60,11 +60,6 @@ class CartController extends GetxController {
     }
   }
 
-  bool _isItemAlreadyAdded(MenuModel menu) =>
-      userController.userModel.value.cart
-          .where((item) => item.menuId == menu.id)
-          .isNotEmpty;
-
   void decreaseQuantity(CartModel item) {
     if (item.qty == 1) {
       removeCartItem(item);

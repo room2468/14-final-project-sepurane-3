@@ -43,7 +43,7 @@ class MenuScreen extends StatelessWidget {
                         ),
                       ),
                       subtitle: Text(
-                        "IDR " + menuItem.price.toStringAsFixed(0),
+                        "IDR " + menuItem.price.toStringAsFixed(0) + " K",
                         style: TextStyle(
                             color: Colors.white,
                             background: Paint()

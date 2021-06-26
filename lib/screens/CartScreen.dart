@@ -46,7 +46,7 @@ class _CartState extends State<Cart> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Total : IDR ${cartController.totalCartPrice.value.toStringAsFixed(0)}",
+                    "Total : IDR ${cartController.totalCartPrice.value.toStringAsFixed(0)} K",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
@@ -131,7 +131,7 @@ class CartItem extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(12),
           child: Text(
-            "IDR ${cartItem.cost.toStringAsFixed(0)}",
+            "IDR ${cartItem.cost.toStringAsFixed(0)} K",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
         ),

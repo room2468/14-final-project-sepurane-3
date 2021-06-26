@@ -166,7 +166,7 @@ class _AddMenuState extends State<AddMenu> {
                       backgroundImage: NetworkImage(documentSnapshot['img']),
                     ),
                     title: Text(documentSnapshot['name']),
-                    subtitle: Text("IDR "+documentSnapshot['price'].toStringAsFixed(0)),
+                    subtitle: Text("IDR"+documentSnapshot['price'].toStringAsFixed(0) +" K"),
                     trailing: SizedBox(
                       width: 100,
                       child: Row(

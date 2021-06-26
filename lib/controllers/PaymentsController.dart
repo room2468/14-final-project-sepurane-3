@@ -4,7 +4,7 @@ import 'package:sepurane_kasir/controllers/CartController.dart';
 import 'package:sepurane_kasir/controllers/UserController.dart';
 import 'package:sepurane_kasir/screens/RiwayatTransaksi.dart';
 import 'package:sepurane_kasir/services/firebase.dart';
-import 'package:sepurane_kasir/model/PaymentsModel.dart';
+import 'package:sepurane_kasir/model/Payments.dart';
 import 'package:uuid/uuid.dart';
 
 class PaymentsController extends GetxController {
@@ -34,7 +34,7 @@ class PaymentsController extends GetxController {
       "id": id,
       "clientId": userController.userModel.value.id,
       "cart": userController.userModel.value.cartItemsToJson(),
-      "amount": cartController.totalCartPrice.value.toStringAsFixed(2),
+      "amount": cartController.totalCartPrice.value,
       "createdAt": DateTime.now().microsecondsSinceEpoch,
     });
   }
