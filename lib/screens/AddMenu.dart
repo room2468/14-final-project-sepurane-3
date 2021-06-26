@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:sepurane_kasir/controllers/MenuController.dart';
 
 class AddMenu extends StatefulWidget {
   @override
@@ -8,21 +9,23 @@ class AddMenu extends StatefulWidget {
 }
 
 class _AddMenuState extends State<AddMenu> {
+  final TextEditingController _idController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _imgController = TextEditingController();
-  final TextEditingController _idController = TextEditingController();
 
   CollectionReference _menu = FirebaseFirestore.instance.collection('menu');
+
+  MenuController menuController = MenuController.instance;
 
   Future<void> _createOrUpdate([DocumentSnapshot documentSnapshot]) async {
     String action = 'create';
     if (documentSnapshot != null) {
       action = 'update';
+      _idController.text = documentSnapshot['id'];
       _nameController.text = documentSnapshot['name'];
       _priceController.text = documentSnapshot['price'].toString();
       _imgController.text = documentSnapshot['img'];
-      _idController.text = documentSnapshot['id'];
     }
 
     await showModalBottomSheet(
@@ -37,7 +40,7 @@ class _AddMenuState extends State<AddMenu> {
               children: [
                 TextFormField(
                   decoration: const InputDecoration(
-                      icon: Icon(Icons.restaurant_menu_rounded),
+                      icon: Icon(Icons.format_list_numbered),
                       helperText: 'Masukkan Kode Menu',
                       labelText: 'Kode Menu'),
                   controller: _idController,
@@ -99,26 +102,25 @@ class _AddMenuState extends State<AddMenu> {
                 ElevatedButton(
                   child: Text(action == 'create' ? 'Create' : 'Update'),
                   onPressed: () async {
-                    final String name = _nameController.text;
-                    final String price = _priceController.text;
-                    final String img = _imgController.text;
                     final String id = _idController.text;
-                    if (name != null && price != null && img != null && id != null) {
+                    final String name = _nameController.text;
+                    final double price = double.tryParse(_priceController.text);
+                    final String img = _imgController.text;
+                    if (id != null && name != null && price != null && img != null ) {
                       if (action == 'create') {
                         await _menu
-                            .add({"name": name, "price": price, "img": img, "id": id});
+                            .add({"id": id, "name": name, "price": price, "img": img});
                       }
 
                       if (action == 'update') {
                         await _menu
                             .doc(documentSnapshot.id)
-                            .update({"name": name, "price": price, "img": img, "id": id});
+                            .update({"id": id, "name": name, "price": price, "img": img});
                       }
-
+                      _idController.text = '';
                       _nameController.text = '';
                       _priceController.text = '';
                       _imgController.text = '';
-                      _idController.text = '';
                       Get.back();
                     }
                   },
@@ -144,7 +146,7 @@ class _AddMenuState extends State<AddMenu> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Get.back();
+           Get.back();
           },
         ),
       ),
@@ -164,7 +166,7 @@ class _AddMenuState extends State<AddMenu> {
                       backgroundImage: NetworkImage(documentSnapshot['img']),
                     ),
                     title: Text(documentSnapshot['name']),
-                    subtitle: Text(documentSnapshot['price'].toString()+ " K"),
+                    subtitle: Text("IDR "+documentSnapshot['price'].toStringAsFixed(0)),
                     trailing: SizedBox(
                       width: 100,
                       child: Row(

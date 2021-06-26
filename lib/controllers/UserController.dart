@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:sepurane_kasir/model/UserModel.dart';
 import 'package:sepurane_kasir/screens/AuthScreen.dart';
 import 'package:sepurane_kasir/screens/HomePage.dart';
@@ -10,6 +11,7 @@ class UserController extends GetxController {
   static UserController instance = Get.find();
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  Logger logger = Logger();
   Rx<User> firebaseUser;
   RxBool isLoggedIn = false.obs;
   TextEditingController name = TextEditingController();
@@ -45,7 +47,6 @@ class UserController extends GetxController {
       });
     } catch (e) {
       debugPrint(e.toString());
-      Get.snackbar("Gagal masuk", "Coba lagi");
     }
   }
 
@@ -61,7 +62,6 @@ class UserController extends GetxController {
       });
     } catch (e) {
       debugPrint(e.toString());
-      Get.snackbar("Registrasi gagal", "Coba lagi");
     }
   }
 

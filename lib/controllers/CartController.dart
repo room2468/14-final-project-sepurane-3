@@ -1,16 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uuid/uuid.dart';
+import 'package:logger/logger.dart';
 import 'package:sepurane_kasir/controllers/UserController.dart';
 import 'package:sepurane_kasir/model/CartModel.dart';
 import 'package:sepurane_kasir/model/MenuModel.dart';
 import 'package:sepurane_kasir/model/UserModel.dart';
+import 'package:uuid/uuid.dart';
 
 class CartController extends GetxController {
   static CartController instance = Get.find();
   UserController userController = UserController.instance;
   RxDouble totalCartPrice = 0.0.obs;
+  Logger logger = Logger();
 
   @override
   void onReady() {
@@ -20,27 +22,21 @@ class CartController extends GetxController {
 
   void addMenuToCart(MenuModel menu) {
     try {
-      if (_isItemAlreadyAdded(menu)) {
-        Get.snackbar("Silahkan cek keranjang", "${menu.name} telah ditambahkan");
-      } else {
-        String itemId = Uuid().toString();
-        userController.updateUserData({
-          "cart": FieldValue.arrayUnion([
-            {
-              "id": itemId,
-              "menuId": menu.id,
-              "name": menu.name,
-              "img": menu.img,
-              "qty": 1,
-              "price": menu.price,
-              "cost": menu.price
-            }
-          ])
-        });
-        Get.snackbar("Berhasil", "${menu.name} berhasil ditambahkan ke keranjang");
-      }
+      String itemId = Uuid().toString();
+      userController.updateUserData({
+        "cart": FieldValue.arrayUnion([
+          {
+            "id": itemId,
+            "menuId": menu.id,
+            "name": menu.name,
+            "img": menu.img,
+            "qty": 1,
+            "price": menu.price,
+            "cost": menu.price
+          }
+        ])
+      });
     } catch (e) {
-      Get.snackbar("Gagal", "Tidak bisa menambahkan item");
       debugPrint(e.toString());
     }
   }
@@ -51,7 +47,6 @@ class CartController extends GetxController {
         "cart": FieldValue.arrayRemove([cartItem.toJson()])
       });
     } catch (e) {
-      Get.snackbar("Error", "Cannot remove this item");
       debugPrint(e.message);
     }
   }
@@ -64,7 +59,6 @@ class CartController extends GetxController {
       });
     }
   }
-
 
   bool _isItemAlreadyAdded(MenuModel menu) =>
       userController.userModel.value.cart
@@ -86,6 +80,7 @@ class CartController extends GetxController {
   void increaseQuantity(CartModel item) {
     removeCartItem(item);
     item.qty++;
+    logger.i({"quantity": item.qty});
     userController.updateUserData({
       "cart": FieldValue.arrayUnion([item.toJson()])
     });

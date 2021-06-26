@@ -18,15 +18,6 @@ class MenuController extends GetxController {
     menu.bindStream(getAllMenu());
   }
 
-  addMenuToFirestore(String menuId) {
-    firebaseFirestore.collection(collection).doc(menuId).set({
-      "name": name,
-      "id": menuId,
-      "img": img,
-      "price": price,
-    });
-  }
-
   Stream<List<MenuModel>> getAllMenu() =>
       firebaseFirestore.collection(collection).snapshots().map((query) =>
           query.docs.map((item) => MenuModel.fromMap(item.data())).toList());

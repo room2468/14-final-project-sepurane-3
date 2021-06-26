@@ -43,7 +43,7 @@ class MenuScreen extends StatelessWidget {
                         ),
                       ),
                       subtitle: Text(
-                        menuItem.price.toString(),
+                        "IDR " + menuItem.price.toStringAsFixed(0),
                         style: TextStyle(
                             color: Colors.white,
                             background: Paint()
@@ -51,13 +51,15 @@ class MenuScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(130, 70, 10, 10),
+                      margin: EdgeInsets.fromLTRB(130, 50, 10, 10),
                       child: IconButton(
                         icon: Icon(
-                          Icons.add,
+                          Icons.add_circle_rounded,
                           color: Colors.white,
                         ),
                         onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Menu Ditambahkan')));
                           cartController.addMenuToCart(menuItem);
                         },
                       ),

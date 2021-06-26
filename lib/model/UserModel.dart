@@ -13,6 +13,7 @@ class UserModel {
   List<CartModel> cart = <CartModel>[];
 
   UserModel({this.id, this.name, this.email, this.cart});
+  // UserModel({this.id, this.name, this.email});
 
   UserModel.fromSnapshot(DocumentSnapshot snapshot) {
     id = snapshot[ID];

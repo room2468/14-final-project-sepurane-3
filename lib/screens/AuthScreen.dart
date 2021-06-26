@@ -70,6 +70,7 @@ class AuthScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 4),
                               child: TextField(
+                                obscureText: true,
                                 controller: userController.password,
                                 decoration: InputDecoration(
                                     icon: Icon(Icons.lock),
@@ -182,6 +183,7 @@ class AuthScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 4),
                               child: TextField(
+                                obscureText: true,
                                 controller: userController.password,
                                 decoration: InputDecoration(
                                     icon: Icon(Icons.lock),
